@@ -18,14 +18,15 @@ describe SsoAuth::SessionController, type: :request do
       expect(response).to redirect_to('http://www.example.com/sso/session')
     end
 
-    it 'should get login page at GET /sso/session' do
+    it 'should return login page at GET /sso/session' do
       get '/sso/session', { sso: sso, sig: sign }, 'HTTP_REFERER' => 'http://foo.com'
       expect(response).to have_http_status(:ok)
-      # expect(response.body).to include("<form action=\"sso\" accept-charset=\"UTF-8\" method=\"post\">")
+      expect(response.body).to include('<div class="authorization">')
     end
   end
 
-  describe 'POST /sso with wrong credentials' do
+  context 'POST /sso/session'
+  describe 'with wrong credentials' do
     let(:params) do
       { user: { email: user.email, password: '12345678' } }
     end
@@ -33,7 +34,7 @@ describe SsoAuth::SessionController, type: :request do
     it { expect(subject).to redirect_to('/sso/session') }
   end
 
-  describe 'POST /sso with right credentials' do
+  describe 'with right credentials' do
     let(:payload) { Session.new(sso: sso, user: user).payload }
     let(:return_sso_url) { "http://www.foo.com/session/sso_login?#{payload}" }
     let(:params) do
