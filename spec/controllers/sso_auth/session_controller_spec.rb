@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe SsoAuth::SessionController, type: :request do
-  let(:doctor) { create :doctor, :with_clinic, password: '123456' }
+  let(:doctor) { create :doctor, password: '123456' }
   let(:sso) { Base64.encode64("return_sso_url=http://www.example.com") }
   let(:sign) { SsoService.new.sign(sso) }
 

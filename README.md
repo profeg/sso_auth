@@ -17,7 +17,7 @@ gem 'sso_auth'
 Install initializer and mount routes:
 
 ```bash
-bin/rails generate - sso_auth
+bin/rails generate sso_auth
 ```
 
 Configure initializer:

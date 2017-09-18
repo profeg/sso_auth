@@ -5,7 +5,7 @@ module SsoAuth
     end
 
     def sign(payload)
-      OpenSSL::HMAC.hexdigest('sha256', ENV['SSO_SECRET_KEY'], payload)
+      OpenSSL::HMAC.hexdigest('sha256', SsoAuth::Configuration.sso_secret, payload)
     end
   end
 end
