@@ -6,7 +6,7 @@
 
 ## Installation
 
-Add engine (https://github.com/profeg/sso_auth) provider gems to your project:
+Add gem to your rails project:
 
 ```ruby
 # Gemfile
@@ -26,18 +26,14 @@ Configure initializer:
 # conifg/initializers/sso_auth.rb
 
 SsoAuth.configure do |config|
-end
-```
-
-And mount it:
-
-```ruby
-# config/routes.rb
-
-Rails.application.routes.draw do
-  mount SsoAuth::Engine => '/sso', as: 'sso'
+  # default auth model
+  config.sso_user = 'User'
+  # Secret key for SSO signing
+  config.sso_secret = ENV['SSO_SECRET_KEY']
 end
 ```
 
 ## Usage
+
+*SOON*
 

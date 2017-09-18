@@ -19,7 +19,7 @@ module SsoAuth
 
     def payload
       payload = Base64.encode64(unsigned_payload)
-      "sso=#{CGI.escape(payload)}&sig=#{sign(payload)}"
+      "sso=#{CGI.escape(payload)}&sig=#{sso_sign(payload)}"
     end
 
     private

@@ -13,7 +13,7 @@ module SsoAuth
     end
 
     def create
-      user = Rhinoart::User.find_by(email: user_params['email'], approved: true)
+      user = user_model.find_by(email: user_params['email'], approved: true)
 
       if user && check_auth(user)
         session_params = new_session_params(user)
@@ -27,6 +27,10 @@ module SsoAuth
     def delete; end
 
     private
+
+    def user_model
+      SsoAuth::Configuration.sso_user.constantize
+    end
 
     def new_session_params(user)
       {}.tap do |p|
@@ -47,7 +51,7 @@ module SsoAuth
 
     def trusted_payload?
       return false if params[:sso].blank? || params[:sig].blank?
-      sign(params[:sso]) == params[:sig]
+      sso_sign(params[:sso]) == params[:sig]
     end
 
   end
