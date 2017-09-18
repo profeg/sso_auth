@@ -1,0 +1,15 @@
+$font-dark-grey: #3a3c41;
+$font-grey: #868b96;
+$font-blue: #009ddc;
+$font-blue-hover: #00abf0;
+$font-dark-blue: #565c6c;
+$font-dark: #2e3137;
+$font-grey-2: #828690;
+$font-grey-3: #4a5262;
+
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}
+  }

@@ -1,0 +1,25 @@
+<div class="login  login--sign-in" v-bind:class="{ display_none: tab_opened != 'sign_in' }">
+  <div class="login__content-wrappper">
+    <%= form_tag session_path do %>
+      <%= hidden_field_tag 'redirect_to', params[:redirect_to] %>
+      <%= hidden_field_tag 'sso', params[:sso] %>
+      <div class="login__content">
+        <div class="login__decor"></div>
+        <h2 class="login__title">Sign in</h2>
+        <p class="login__tip">for Patients & Providers</p>
+        <label class="login__label <%= 'error_label' if flash[:notice].present? %>">
+          <span class="login__text">Your Email</span>
+          <%= text_field_tag 'user[email]', '', class: 'login__field', required: '' %>
+        </label>
+        <label class="login__label <%= 'error_label' if flash[:notice].present? %>">
+          <span class="login__text">Password</span>
+          <%= password_field_tag 'user[password]', '', class: 'login__field', required: '' %>
+          <%- if flash[:notice].present? %>
+            <span class="login__warning"><%= flash[:notice] %></span>
+          <% end %>
+        </label>
+        <%= button_tag 'Sign in', class: 'authorization__btn' %>
+      </div>
+    <% end %>
+  </div>
+</div>

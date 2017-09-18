@@ -1,0 +1,22 @@
+<div class="authorization">
+  <div class="container-main">
+    <div id='tab_auth_page' data-opened="<%= @opened %>">
+      <div class="authorization__toggle-wrap">
+        <button v-on:click="showTabSignIn"
+                class="authorization__toggle" type="button"
+                v-bind:class="{ bottom_border: tab_opened == 'sign_in' }">
+          <b>Sign in</b>
+        </button>
+        <button v-on:click="showTabRegister"
+                class="authorization__toggle" type="button"
+                v-bind:class="{ bottom_border: tab_opened == 'register' }">
+          <b>Register</b>
+        </button>
+      </div>
+
+      <div class="authorization__wrapper">
+        <%= render 'sso_auth/authorization/sign_in' %>
+      </div>
+    </div>
+  </div>
+</div>

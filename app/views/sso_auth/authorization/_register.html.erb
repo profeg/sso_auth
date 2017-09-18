@@ -1,0 +1,55 @@
+<div class="register" v-bind:class="{ display_none: tab_opened != 'register' }">
+  <div class="register__join-block">
+    <span class="register__join-text">
+      <b>Are you a provider?</b><br>
+      <%= link_to 'Join the tEMed', main_app.page_path('providers'), class: 'register__link' %>
+      team now
+    </span>
+    <%= link_to 'Join', main_app.page_path('providers'), class: 'register__btn' %>
+  </div>
+
+  <%= form_for @user, url: users_registrations_path, html: { class: 'register__form' } do |f| %>
+    <%= hidden_field_tag 'redirect_to', params[:redirect_to] if params[:redirect_to].present? %>
+    <h2 class="register__title">
+      Register as Patient
+      <!-- <button class="register__gplus-btn" type="button">or use <span></span></button> -->
+    </h2>
+
+    <label class="register__label  register__label--big <%= 'error_label' if @user.errors[:email].present? %>">
+      <span class="register__text">Email</span>
+      <%= f.email_field :email, class: 'register__field', placeholder: "It will be used as login" %>
+      <span class="register__warning"><%= @user.errors.full_messages_for(:email).join(', ') %></span>
+    </label>
+
+    <label class="register__label  register__label--small <%= 'error_label' if @user.errors[:first_name].present? %>">
+      <span class="register__text">First name</span>
+      <%= f.text_field :first_name, class: 'register__field' %>
+      <span class="register__warning"><%= @user.errors.full_messages_for(:first_name).join(', ') %></span>
+    </label>
+
+    <label class="register__label  register__label--small <%= 'error_label' if @user.errors[:last_name].present? %>">
+      <span class="register__text">Last name</span>
+      <%= f.text_field :last_name, class: 'register__field' %>
+      <span class="register__warning"><%= @user.errors.full_messages_for(:last_name).join(', ') %></span>
+    </label>
+
+    <label class="register__label <%= 'error_label' if @user.errors[:password_confirmation].present? || @user.errors.messages[:password].present? %>">
+      <span class="register__text">Create password</span>
+      <%= f.password_field :password, class: 'register__field' %>
+      <span class="register__warning"><%= @user.errors.full_messages_for(:password).join(', ') %></span>
+    </label>
+
+    <label class="register__label <%= 'error_label' if @user.errors[:password_confirmation].present? || @user.errors.messages[:password].present? %>">
+      <span class="register__text">Password confirmation</span>
+      <%= f.password_field :password_confirmation, class: 'register__field' %>
+      <span class="register__warning"><%= @user.errors.full_messages_for(:password_confirmation).join(', ') %></span>
+    </label>
+    <p class="register__agreement">
+      By clicking Register, I agree to the <br>
+      <%= link_to 'HIPAA Privacy Policy', main_app.page_path('privacy-policy'), class: 'authorization__link authorization__link--inline' %>
+      and
+      <%= link_to link_to 'Terms of Use', main_app.page_path('terms-of-use'), class: 'authorization__link  authorization__link--inline' %>
+    </p>
+    <%= button_tag 'Register', class: 'authorization__btn' %>
+  <% end %>
+</div>
